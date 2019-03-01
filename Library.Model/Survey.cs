@@ -20,6 +20,11 @@ namespace Library.Model
 
         private static int NumberOfSurveys = 0;
 
+        public Survey()
+        {
+
+        }
+
         public Survey(int userId)
         {
             Id = NumberOfSurveys++;
