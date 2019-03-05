@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Survey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurveyAnswer.cs" />
+    <Compile Include="SurveyQuestion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

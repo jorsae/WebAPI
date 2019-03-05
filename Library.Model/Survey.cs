@@ -14,12 +14,14 @@ namespace Library.Model
         private int userId;
         public int UserId { get => userId; set => userId = value; }
 
-        private DateTime creationTime;
-        public DateTime CreationTime { get => creationTime; set => creationTime = value; }
+        private DateTime creationDate;
+        public DateTime CreationDate { get => creationDate; set => creationDate = value; }
 
+        public virtual List<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
 
         private static int NumberOfSurveys = 0;
 
+        // Empty constructor for EntityFramework
         public Survey()
         {
 
@@ -29,7 +31,7 @@ namespace Library.Model
         {
             Id = NumberOfSurveys++;
             UserId = userId;
-            CreationTime = DateTime.Now;
+            CreationDate = DateTime.Now;
         }
     }
 }
