@@ -30,23 +30,11 @@ namespace Library.DataAccess
 
             modelBuilder.Entity<Survey>()
                 .HasMany(survey => survey.SurveyQuestions)
-                .WithMany(surveyQuestion => surveyQuestion.Surveys)
-                .Map(m =>
-                {
-                    m.ToTable("Survey_SurveyQuestion");
-                    m.MapLeftKey("SurveyId");
-                    m.MapRightKey("SurveyQuestionId");
-                });
+                .WithOptional(surveyQuestion => surveyQuestion.Survey);
 
             modelBuilder.Entity<SurveyQuestion>()
                 .HasMany(surveyQuestion => surveyQuestion.SurveyAnswers)
-                .WithMany(surveyAnswer => surveyAnswer.SurveyQuestions)
-                .Map(m =>
-                {
-                    m.ToTable("SurveyQuestion_SurveyAnswer");
-                    m.MapLeftKey("SurveyQuestionId");
-                    m.MapRightKey("SurveyAnswerId");
-                });
+                .WithOptional(surveyAnswer => surveyAnswer.SurveyQuestion);
 
             base.OnModelCreating(modelBuilder);
         }

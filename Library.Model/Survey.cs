@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ namespace Library.Model
 {
     public class Survey
     {
+        [Key]
         private int id;
         public int Id { get => id; set => id = value; }
 
@@ -17,7 +19,7 @@ namespace Library.Model
         private DateTime creationDate;
         public DateTime CreationDate { get => creationDate; set => creationDate = value; }
 
-        public virtual List<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
+        public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
 
         private static int NumberOfSurveys = 0;
 
