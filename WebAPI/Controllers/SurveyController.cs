@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> GetRegisterUser(int id)
         {
-            Survey survey= await db.Surveys.FindAsync(id);
+            Survey survey = await db.Surveys.FindAsync(id);
             return Ok(survey);
         }
     }

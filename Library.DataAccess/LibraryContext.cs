@@ -30,11 +30,13 @@ namespace Library.DataAccess
 
             modelBuilder.Entity<Survey>()
                 .HasMany(survey => survey.SurveyQuestions)
-                .WithOptional(surveyQuestion => surveyQuestion.Survey);
+                .WithRequired(surveyQuestion => surveyQuestion.Survey)
+                .HasForeignKey<int>(surveyQuestion => surveyQuestion.SurveyId);
 
             modelBuilder.Entity<SurveyQuestion>()
                 .HasMany(surveyQuestion => surveyQuestion.SurveyAnswers)
-                .WithOptional(surveyAnswer => surveyAnswer.SurveyQuestion);
+                .WithRequired(surveyAnswer => surveyAnswer.SurveyQuestion)
+                .HasForeignKey<int>(surveyAnwer => surveyAnwer.SurveyQuestionId);
 
             base.OnModelCreating(modelBuilder);
         }

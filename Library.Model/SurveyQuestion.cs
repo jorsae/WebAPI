@@ -19,6 +19,9 @@ namespace Library.Model
         private int questionNumber;
         public int QuestionNumber { get => questionNumber; set => questionNumber = value; }
 
+        private int surveyId;
+        public int SurveyId { get => surveyId; set => surveyId = value; }
+
         private Survey survey;
         public Survey Survey { get => survey; set => survey = value; }
 
