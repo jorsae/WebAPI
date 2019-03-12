@@ -9,6 +9,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Web.Http.Results;
 
 namespace WebAPI.Controllers
 {
@@ -44,16 +45,65 @@ namespace WebAPI.Controllers
 
             db.Surveys.Add(survey);
 
+            return await SaveDatabaseAsync(survey.Id);
+        }
+
+        // DELETE: api/survey/{survey}
+        [Route("api/survey/{id}")]
+        [HttpDelete]
+        [ResponseType(typeof(Survey))]
+        public async Task<IHttpActionResult> DeleteSurvey(int id)
+        {
+            Survey survey = await db.Surveys.FindAsync(id);
+            if(survey == null)
+            {
+                return NotFound();
+            }
+
+            db.Surveys.Remove(survey);
+
             try
             {
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SurveyExists(survey.Id))
-                    return NotFound();
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+            return Ok(survey);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private async Task<StatusCodeResult> SaveDatabaseAsync(int surveyId)
+        {
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SurveyExists(surveyId))
+                {
+                    return StatusCode(HttpStatusCode.NotFound);
+                }
                 else
+                {
                     return StatusCode(HttpStatusCode.InternalServerError);
+                }
             }
             catch (Exception)
             {
