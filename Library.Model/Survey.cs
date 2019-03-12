@@ -10,8 +10,8 @@ namespace Library.Model
     public class Survey
     {
         [Key]
-        private int id;
-        public int Id { get => id; set => id = value; }
+        private int surveyId;
+        public int SurveyId { get => surveyId; set => surveyId = value; }
 
         private int userId;
         public int UserId { get => userId; set => userId = value; }
@@ -31,7 +31,7 @@ namespace Library.Model
 
         public Survey(int userId)
         {
-            Id = NumberOfSurveys++;
+            SurveyId = NumberOfSurveys++;
             UserId = userId;
             CreationDate = DateTime.Now;
         }

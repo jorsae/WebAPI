@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Survey/5
-        [Route("api/Survey/{id}")]
+        [Route("api/survey/{id}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> GetSurvey(int id)
@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
 
             db.Surveys.Add(survey);
 
-            return await SaveDatabaseAsync(survey.Id);
+            return await SaveDatabaseAsync(survey.SurveyId);
         }
 
         // DELETE: api/survey/{survey}
@@ -115,7 +115,7 @@ namespace WebAPI.Controllers
 
         private bool SurveyExists(int id)
         {
-            return db.Surveys.Count(survey => survey.Id == id) > 0;
+            return db.Surveys.Count(survey => survey.SurveyId == id) > 0;
         }
     }
 }

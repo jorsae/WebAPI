@@ -27,9 +27,10 @@ namespace Library.Model
         {
 
         }
-        public SurveyAnswer(int answer)
+        public SurveyAnswer(int answer, int surveyQuestionId)
         {
             Answer = answer;
+            SurveyQuestionId = surveyQuestionId;
         }
     }
 }
