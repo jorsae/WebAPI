@@ -27,6 +27,7 @@ namespace Library.Model
         {
 
         }
+
         public SurveyAnswer(int answer, int surveyQuestionId)
         {
             Answer = answer;
