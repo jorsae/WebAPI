@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: api/Survey
-        public IQueryable<Survey> GetSurveys()d
+        public IQueryable<Survey> GetSurveys()
         {
             return db.Surveys;
         }
