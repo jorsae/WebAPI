@@ -113,7 +113,7 @@ namespace WebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // testkommentar
+        // testkommentar pdwokdpoaks
         private bool SurveyQuestionExists(int id)
         {
             return db.SurveyQuestions.Count(surveyQuestion => surveyQuestion.SurveyQuestionId == id) > 0;
