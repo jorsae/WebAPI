@@ -24,16 +24,26 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/surveyquestion/5
+        /// <summary>
+        /// Gets the SurveyQuestion based on id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [Route("api/surveyquestion/{id}")]
         [HttpGet]
         [ResponseType(typeof(SurveyQuestion))]
-        public async Task<IHttpActionResult> GetRegisterUser(int id)
+        public async Task<IHttpActionResult> GetSurveyQuestion(int id)
         {
             SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(id);
             return Ok(surveyQuestion);
         }
 
         // PUT: api/surveyquestion/{surveyquestion}
+        /// <summary>
+        /// Puts the survey question in database
+        /// </summary>
+        /// <param name="surveyQuestion">The survey question.</param>
+        /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutSurveyQuestion(SurveyQuestion surveyQuestion)
@@ -49,6 +59,11 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/surveyquestion/{surveyquestion}
+        /// <summary>
+        /// Deletes the SurveyQuestion from database
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [Route("api/surveyquestion/{id}")]
         [HttpDelete]
         [ResponseType(typeof(SurveyQuestion))]
@@ -113,7 +128,6 @@ namespace WebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // testkommentar pdwokdpoaks
         private bool SurveyQuestionExists(int id)
         {
             return db.SurveyQuestions.Count(surveyQuestion => surveyQuestion.SurveyQuestionId == id) > 0;

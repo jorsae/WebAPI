@@ -24,6 +24,11 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Survey/5
+        /// <summary>
+        /// Gets the survey answer based on id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [Route("api/surveyanswer/{id}")]
         [HttpGet]
         [ResponseType(typeof(SurveyAnswer))]
@@ -34,6 +39,11 @@ namespace WebAPI.Controllers
         }
 
         // PUT: api/Survey/{survey}
+        /// <summary>
+        /// Puts the SurveyAnswer in database
+        /// </summary>
+        /// <param name="surveyAnswer">The survey answer.</param>
+        /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(SurveyAnswer))]
         public async Task<IHttpActionResult> PutSurveyAnswer(SurveyAnswer surveyAnswer)

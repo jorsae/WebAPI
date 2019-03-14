@@ -24,6 +24,11 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Survey/5
+        /// <summary>
+        /// Gets the survey by id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [Route("api/survey/{id}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
@@ -34,6 +39,11 @@ namespace WebAPI.Controllers
         }
 
         // PUT: api/Survey/{survey}
+        /// <summary>
+        /// Puts survey to database
+        /// </summary>
+        /// <param name="survey">The survey.</param>
+        /// <returns></returns>
         [HttpPut]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutSurvey(Survey survey)
@@ -49,6 +59,11 @@ namespace WebAPI.Controllers
         }
 
         // DELETE: api/survey/{survey}
+        /// <summary>
+        /// Deletes survey from database
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [Route("api/survey/{id}")]
         [HttpDelete]
         [ResponseType(typeof(Survey))]
