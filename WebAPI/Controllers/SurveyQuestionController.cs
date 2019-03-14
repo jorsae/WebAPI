@@ -1,6 +1,7 @@
 ﻿using Library.DataAccess;
 using Library.Model;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -35,7 +36,24 @@ namespace WebAPI.Controllers
         public async Task<IHttpActionResult> GetSurveyQuestion(int id)
         {
             SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(id);
+            if (surveyQuestion == null)
+                return StatusCode(HttpStatusCode.NoContent);
+
             return Ok(surveyQuestion);
+        }
+
+        [Route("api/surveyquestion/surveyid/{surveyId}")]
+        [HttpGet]
+        [ResponseType(typeof(SurveyQuestion))]
+        public async Task<IHttpActionResult> GetSurveyQuestionBySurveyId(int surveyId)
+        {
+            List<SurveyQuestion> surveyQuestions = await (from surveyQuestion in db.SurveyQuestions
+                                                    where surveyQuestion.SurveyId == surveyId
+                                                    select surveyQuestion).ToListAsync();
+            if (surveyQuestions.Count <= 0)
+                return StatusCode(HttpStatusCode.NoContent);
+
+            return Ok(surveyQuestions);
         }
 
         // PUT: api/surveyquestion/{surveyquestion}

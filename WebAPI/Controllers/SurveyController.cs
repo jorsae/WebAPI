@@ -36,6 +36,10 @@ namespace WebAPI.Controllers
         public async Task<IHttpActionResult> GetSurveyById(int id)
         {
             Survey survey = await db.Surveys.FindAsync(id);
+
+            if (survey == null)
+                return StatusCode(HttpStatusCode.NoContent);
+
             return Ok(survey);
         }
 
