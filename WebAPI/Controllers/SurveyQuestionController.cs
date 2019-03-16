@@ -73,7 +73,20 @@ namespace WebAPI.Controllers
 
             db.SurveyQuestions.Add(surveyQuestion);
 
-            return await SaveDatabaseAsync(surveyQuestion.SurveyQuestionId);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+            return StatusCode(HttpStatusCode.Created);
         }
 
         // DELETE: api/surveyquestion/{surveyquestion}
@@ -108,7 +121,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return Ok(surveyQuestion);
+            return StatusCode(HttpStatusCode.Created);
         }
 
         protected override void Dispose(bool disposing)
@@ -119,31 +132,6 @@ namespace WebAPI.Controllers
             }
 
             base.Dispose(disposing);
-        }
-
-        private async Task<StatusCodeResult> SaveDatabaseAsync(int surveyQuestionId)
-        {
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SurveyQuestionExists(surveyQuestionId))
-                {
-                    return StatusCode(HttpStatusCode.NotFound);
-                }
-                else
-                {
-                    return StatusCode(HttpStatusCode.InternalServerError);
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(HttpStatusCode.InternalServerError);
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         private bool SurveyQuestionExists(int id)
