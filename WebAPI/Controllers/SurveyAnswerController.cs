@@ -42,6 +42,11 @@ namespace WebAPI.Controllers
             return Ok(surveyAnswer);
         }
 
+        /// <summary>
+        /// Gets the survey question answers.
+        /// </summary>
+        /// <param name="questionId">The question identifier.</param>
+        /// <returns></returns>
         [Route("api/surveyanswer/question/{questionId}")]
         [HttpGet]
         [ResponseType(typeof(SurveyAnswer))]
@@ -74,25 +79,13 @@ namespace WebAPI.Controllers
 
             db.SurveyAnswers.Add(surveyAnswer);
 
-            return await SaveDatabaseAsync(surveyAnswer.SurveyAnswerId);
-        }
-
-        private async Task<IHttpActionResult> SaveDatabaseAsync(int surveyAnswerId)
-        {
             try
             {
                 await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SurveyAnswerExists(surveyAnswerId))
-                {
-                    return StatusCode(HttpStatusCode.NotFound);
-                }
-                else
-                {
-                    return StatusCode(HttpStatusCode.InternalServerError);
-                }
+                return StatusCode(HttpStatusCode.InternalServerError);
             }
             catch (Exception)
             {
