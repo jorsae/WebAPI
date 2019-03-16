@@ -74,12 +74,25 @@ namespace WebAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(ModelState); // 400
             }
 
             db.Surveys.Add(survey);
 
-            return await SaveDatabaseAsync(survey.SurveyId);
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+
+            return StatusCode(HttpStatusCode.Created);
         }
 
         // DELETE: api/survey/{survey}
@@ -114,7 +127,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return Ok(survey);
+            return StatusCode(HttpStatusCode.Created);
         }
 
         protected override void Dispose(bool disposing)
@@ -127,31 +140,11 @@ namespace WebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private async Task<StatusCodeResult> SaveDatabaseAsync(int surveyId)
-        {
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SurveyExists(surveyId))
-                {
-                    return StatusCode(HttpStatusCode.NotFound);
-                }
-                else
-                {
-                    return StatusCode(HttpStatusCode.InternalServerError);
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(HttpStatusCode.InternalServerError);
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
+        /// <summary>
+        /// returns true if survey exists. False otherwise.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         private bool SurveyExists(int id)
         {
             return db.Surveys.Count(survey => survey.SurveyId == id) > 0;
