@@ -11,9 +11,18 @@ namespace Library.Model
     {
         [Key]
         private int surveyQuestionId;
-        public int SurveyQuestionId { get => surveyQuestionId; set => surveyQuestionId = value; }
+        public int SurveyQuestionId
+        {
+            get { return surveyQuestionId; }
+            set
+            {
+                surveyQuestionId = value;
+            }
+        }
 
-        public string Question { get; set; }
+        private string _question;
+        public string Question { get => _question; set => _question = value; }
+
         public int QuestionNumber { get; set; }
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
@@ -21,10 +30,11 @@ namespace Library.Model
         public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
         private static int NumberOfSurveyQuestions = 0;
+
         // Empty constructor for EntityFramework
         public SurveyQuestion()
         {
-            
+
         }
 
         public SurveyQuestion(int questionNumber, string question)
