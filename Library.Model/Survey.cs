@@ -10,18 +10,9 @@ namespace Library.Model
     public class Survey
     {
         [Key]
-        private int surveyId;
-        public int SurveyId
-        {
-            get { return surveyId; }
-            set
-            {
-                surveyId = value;
-            }
-        }
+        public int SurveyId { get; set; }
 
-        private int _userId;
-        public int UserId { get => _userId; set => _userId = value; }
+        public int UserId { get; set; }
 
         public DateTime CreationDate { get; set; }
 

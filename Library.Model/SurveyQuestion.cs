@@ -10,19 +10,9 @@ namespace Library.Model
     public class SurveyQuestion
     {
         [Key]
-        private int surveyQuestionId;
-        public int SurveyQuestionId
-        {
-            get { return surveyQuestionId; }
-            set
-            {
-                surveyQuestionId = value;
-            }
-        }
+        public int SurveyQuestionId { get; set; }
 
-        private string _question;
-        public string Question { get => _question; set => _question = value; }
-
+        public string Question { get; set; }
         public int QuestionNumber { get; set; }
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
@@ -39,7 +29,7 @@ namespace Library.Model
 
         public SurveyQuestion(int questionNumber, string question)
         {
-            surveyQuestionId = NumberOfSurveyQuestions++;
+            SurveyQuestionId = NumberOfSurveyQuestions++;
             QuestionNumber = questionNumber;
             Question = question;
         }
