@@ -9,18 +9,17 @@ namespace Library.Model
 {
     public class SurveyAnswer
     {
-        [Key]
-        private int surveyAnswerId;
-
-        public int SurveyAnswerId { get => surveyAnswerId; set => surveyAnswerId = value; }
-
         private int _answer;
         private int _surveyQuestionId;
+        private int _surveyAnswerId;
+        private SurveyQuestion _surveyQuestion;
 
+        [Key]
+        public int SurveyAnswerId { get => _surveyAnswerId; set => _surveyAnswerId = value; }
         public int Answer { get => _answer; set => _answer = value; }
         public int SurveyQuestionId { get => _surveyQuestionId; set => _surveyQuestionId = value; }
 
-        public SurveyQuestion SurveyQuestion { get; set; }
+        public SurveyQuestion SurveyQuestion { get => _surveyQuestion; set => _surveyQuestion = value; }
 
         // Empty constructor for EntityFramework
         public SurveyAnswer()
