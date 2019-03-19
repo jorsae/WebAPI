@@ -11,8 +11,18 @@ namespace Library.Model
     {
         [Key]
         private int surveyId;
-        public int SurveyId { get => surveyId; set => surveyId = value; }
-        public int UserId { get; set; }
+        public int SurveyId
+        {
+            get { return surveyId; }
+            set
+            {
+                surveyId = value;
+            }
+        }
+
+        private int _userId;
+        public int UserId { get => _userId; set => _userId = value; }
+
         public DateTime CreationDate { get; set; }
 
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
