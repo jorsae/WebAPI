@@ -18,7 +18,7 @@ namespace Library.DataAccess
         public LibraryContext()
         {
             Configuration.ProxyCreationEnabled = false;
-            string connectionString = "Server=tcp:bo19.database.windows.net,1433;Initial Catalog=BachDB;Persist Security Info=False;User ID=bo19funky;Password=¤\"%Vvnmi03104g9h12fv345;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            const string connectionString = "Server=tcp:bo19.database.windows.net,1433;Initial Catalog=BachDB;Persist Security Info=False;User ID=bo19funky;Password=¤\"%Vvnmi03104g9h12fv345; MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             Database.Connection.ConnectionString = connectionString;
             Database.SetInitializer(new LibraryDBInitializer());
         }
