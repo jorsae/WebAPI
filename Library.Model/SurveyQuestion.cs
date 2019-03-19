@@ -13,17 +13,10 @@ namespace Library.Model
         private int surveyQuestionId;
         public int SurveyQuestionId { get => surveyQuestionId; set => surveyQuestionId = value; }
 
-        private string question;
-        public string Question { get => question; set => question = value; }
-
-        private int questionNumber;
-        public int QuestionNumber { get => questionNumber; set => questionNumber = value; }
-
-        private int surveyId;
-        public int SurveyId { get => surveyId; set => surveyId = value; }
-
-        private Survey survey;
-        public Survey Survey { get => survey; set => survey = value; }
+        public string Question { get; set; }
+        public int QuestionNumber { get; set; }
+        public int SurveyId { get; set; }
+        public Survey Survey { get; set; }
 
         public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
