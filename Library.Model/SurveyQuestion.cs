@@ -19,8 +19,6 @@ namespace Library.Model
 
         public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
-        private static int NumberOfSurveyQuestions = 0;
-
         // Empty constructor for EntityFramework
         public SurveyQuestion()
         {
@@ -29,7 +27,6 @@ namespace Library.Model
 
         public SurveyQuestion(int questionNumber, string question)
         {
-            SurveyQuestionId = NumberOfSurveyQuestions++;
             QuestionNumber = questionNumber;
             Question = question;
         }

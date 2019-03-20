@@ -18,8 +18,6 @@ namespace Library.Model
 
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
 
-        private static int NumberOfSurveys = 0;
-
         // Empty constructor for EntityFramework
         public Survey()
         {
@@ -28,7 +26,6 @@ namespace Library.Model
 
         public Survey(int userId)
         {
-            SurveyId = NumberOfSurveys++;
             UserId = userId;
             CreationDate = DateTime.Now;
         }
