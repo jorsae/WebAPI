@@ -68,7 +68,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="surveyAnswer">The survey answer.</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [ResponseType(typeof(SurveyAnswer))]
         public async Task<IHttpActionResult> PutSurveyAnswer(SurveyAnswer surveyAnswer)
         {
