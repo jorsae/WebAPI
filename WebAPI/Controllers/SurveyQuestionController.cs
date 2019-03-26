@@ -95,12 +95,12 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        [Route("api/surveyquestion/{id}")]
+        [Route("api/surveyquestion/{surveyQuestionId}")]
         [HttpDelete]
         [ResponseType(typeof(SurveyQuestion))]
-        public async Task<IHttpActionResult> DeleteSurveyQuestion(int id)
+        public async Task<IHttpActionResult> DeleteSurveyQuestion(int surveyQuestionId)
         {
-            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(id);
+            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyQuestionId);
             if (surveyQuestion == null)
             {
                 return NotFound();
@@ -122,6 +122,37 @@ namespace WebAPI.Controllers
             }
 
             return StatusCode(HttpStatusCode.Created);
+        }
+
+        [Route("api/surveyquestion/stats/{surveyQuestionId}")]
+        [HttpGet]
+        [ResponseType(typeof(float))]
+        public IHttpActionResult GetSurveyQuestionStats(int surveyQuestionId)
+        {
+            var a = db.SurveyAnswers.Where(i => i.SurveyQuestionId == surveyQuestionId)
+                .GroupBy(g => g.SurveyQuestionId)
+                .Select(g => new
+                {
+                    Count = g.Count(),
+                    Max = g.Max(i => i.Answer),
+                    Min = g.Min(i => i.Answer),
+                    Average = g.Average(i => i.Answer)
+                });
+            return Ok(a);
+        }
+
+        [Route("api/surveyquestion/frequency/{surveyQuestionId}")]
+        [HttpGet]
+        [ResponseType(typeof(float))]
+        public IHttpActionResult GetSurveyQuestionFrequency(int surveyQuestionId)
+        {
+            IEnumerable<int> mostFrequent = db.SurveyAnswers
+                       .Where(a => a.SurveyQuestionId == surveyQuestionId)
+                       .GroupBy(i => i.Answer)
+                       .OrderByDescending(g => g.Count())
+                       .Take(10)
+                       .Select(g => g.Key);
+            return Ok(mostFrequent);
         }
 
         protected override void Dispose(bool disposing)
