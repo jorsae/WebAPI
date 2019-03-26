@@ -129,7 +129,7 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(float))]
         public IHttpActionResult GetSurveyQuestionStats(int surveyQuestionId)
         {
-            var a = db.SurveyAnswers.Where(i => i.SurveyQuestionId == surveyQuestionId)
+            var stats = db.SurveyAnswers.Where(i => i.SurveyQuestionId == surveyQuestionId)
                 .GroupBy(g => g.SurveyQuestionId)
                 .Select(g => new
                 {
@@ -137,8 +137,8 @@ namespace WebAPI.Controllers
                     Max = g.Max(i => i.Answer),
                     Min = g.Min(i => i.Answer),
                     Average = g.Average(i => i.Answer)
-                });
-            return Ok(a);
+                }).First();
+            return Ok(stats);
         }
 
         [Route("api/surveyquestion/frequency/{surveyQuestionId}")]
