@@ -7,12 +7,12 @@ namespace Library.DataAccess
     {
         protected override void Seed(LibraryContext context)
         {
-            Survey survey1 = new Survey(1, "Arbeidsplass");
+            Survey survey1 = new Survey("Arbeidsplass");
             SurveyQuestion surveyQuestion1 = new SurveyQuestion(1, "Liker du arbeidsplassen din?");
             SurveyAnswer survey1Answer1 = new SurveyAnswer(3, surveyQuestion1.SurveyQuestionId);
             SurveyAnswer survey1Answer2 = new SurveyAnswer(5, surveyQuestion1.SurveyQuestionId);
 
-            Survey survey2 = new Survey(2, "Mat Survey");
+            Survey survey2 = new Survey("Mat Survey");
             SurveyQuestion surveyQuestion2 = new SurveyQuestion(1, "Liker du pannekaker??");
             SurveyAnswer survey2Answer1 = new SurveyAnswer(3, surveyQuestion2.SurveyQuestionId);
             SurveyAnswer survey2Answer2 = new SurveyAnswer(7, surveyQuestion2.SurveyQuestionId);

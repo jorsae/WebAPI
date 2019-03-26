@@ -12,7 +12,6 @@ namespace Library.Model
         [Key]
         public int SurveyId { get; set; }
 
-        public int UserId { get; set; }
         public string SurveyTitle { get; set; }
 
         public DateTime CreationDate { get; set; }
@@ -25,9 +24,8 @@ namespace Library.Model
 
         }
 
-        public Survey(int userId, string surveyTitle)
+        public Survey(string surveyTitle)
         {
-            UserId = userId;
             SurveyTitle = surveyTitle;
             CreationDate = DateTime.Now;
         }
