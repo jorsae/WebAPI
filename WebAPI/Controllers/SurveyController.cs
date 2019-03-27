@@ -18,13 +18,13 @@ namespace WebAPI.Controllers
     {
         private LibraryContext db = new LibraryContext();
 
-        // GET: api/Survey
+        // GET: api/survey
         public IQueryable<Survey> GetSurveys()
         {
             return db.Surveys;
         }
 
-        // GET: api/Survey/5
+        // GET: api/survey/5
         /// <summary>
         /// Gets the survey by id
         /// </summary>
@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
-        // PUT: api/Survey/{survey}
+        // PUT: api/survey/{survey}
         /// <summary>
         /// Puts survey to database
         /// </summary>
@@ -73,6 +73,34 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
+            return StatusCode(HttpStatusCode.Created);
+        }
+
+        // PUT: api/survey/inactive/{surveyId}
+        [Route("api/survey/inactive/{surveyId}")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> SurveyInactive(int surveyId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // 400
+            }
+
+            Survey survey = await db.Surveys.FindAsync(surveyId);
+            survey.ClosingDate = DateTime.Now;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
             return StatusCode(HttpStatusCode.Created);
         }
 
