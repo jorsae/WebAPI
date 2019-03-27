@@ -25,8 +25,9 @@ namespace Library.Model
 
         }
 
-        public SurveyQuestion(int questionNumber, string question)
+        public SurveyQuestion(int surveyId, int questionNumber, string question)
         {
+            SurveyId = surveyId;
             QuestionNumber = questionNumber;
             Question = question;
         }

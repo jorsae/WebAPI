@@ -22,10 +22,10 @@ namespace Library.Model
 
         }
 
-        public SurveyAnswer(int answer, int surveyQuestionId)
+        public SurveyAnswer(int surveyQuestionId, int answer)
         {
-            Answer = answer;
             SurveyQuestionId = surveyQuestionId;
+            Answer = answer;
         }
     }
 }
