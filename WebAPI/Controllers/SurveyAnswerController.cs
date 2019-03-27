@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
             SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyAnswer.SurveyQuestion);
             Survey survey = await db.Surveys.FindAsync(surveyQuestion.SurveyId);
 
-            if (survey.IsActive())
+            if (!survey.IsActive())
             {
                 return StatusCode(HttpStatusCode.Unauthorized); // 401
             }
