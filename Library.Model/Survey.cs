@@ -31,7 +31,14 @@ namespace Library.Model
             ClosingDate = (closingDate == null) ? DateTime.Now.AddDays(7) : (DateTime)closingDate;
             SurveyTitle = surveyTitle;
             CreationDate = DateTime.Now;
+        }
 
+        public bool IsActive()
+        {
+            if (ClosingDate >= DateTime.Now)
+                return true;
+            else
+                return false;
         }
     }
 }

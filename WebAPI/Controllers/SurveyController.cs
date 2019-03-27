@@ -58,6 +58,11 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState); // 400
             }
 
+            if (!survey.IsActive())
+            {
+                return StatusCode(HttpStatusCode.Unauthorized); // 401
+            }
+
             db.Surveys.Add(survey);
 
             try
