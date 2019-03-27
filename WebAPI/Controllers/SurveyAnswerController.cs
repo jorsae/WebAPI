@@ -77,6 +77,14 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyAnswer.SurveyQuestion);
+            Survey survey = await db.Surveys.FindAsync(surveyQuestion.SurveyId);
+
+            if (survey.IsActive())
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
+
             db.SurveyAnswers.Add(surveyAnswer);
 
             try
