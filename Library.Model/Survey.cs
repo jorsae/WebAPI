@@ -16,6 +16,8 @@ namespace Library.Model
 
         public DateTime CreationDate { get; set; }
 
+        public DateTime ClosingDate { get; set; }
+
         public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
 
         // Empty constructor for EntityFramework
@@ -24,10 +26,12 @@ namespace Library.Model
 
         }
 
-        public Survey(string surveyTitle)
+        public Survey(string surveyTitle, DateTime? closingDate = null)
         {
+            ClosingDate = (closingDate == null) ? DateTime.Now.AddDays(7) : (DateTime)closingDate;
             SurveyTitle = surveyTitle;
             CreationDate = DateTime.Now;
+
         }
     }
 }
