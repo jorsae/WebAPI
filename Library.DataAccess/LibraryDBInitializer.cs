@@ -9,8 +9,8 @@ namespace Library.DataAccess
         {
             Survey survey1 = new Survey("Arbeidsplass");
             SurveyQuestion surveyQuestion1 = new SurveyQuestion(survey1.SurveyId, 1, "Liker du arbeidsplassen din?");
-            SurveyAnswer survey1Answer1 = new SurveyAnswer(3, surveyQuestion1.SurveyQuestionId);
-            SurveyAnswer survey1Answer2 = new SurveyAnswer(5, surveyQuestion1.SurveyQuestionId);
+            SurveyAnswer survey1Answer1 = new SurveyAnswer(surveyQuestion1.SurveyQuestionId, 3);
+            SurveyAnswer survey1Answer2 = new SurveyAnswer(surveyQuestion1.SurveyQuestionId, 5);
 
             Survey survey2 = new Survey("Mat Survey");
             SurveyQuestion surveyQuestion2 = new SurveyQuestion(survey2.SurveyId, 1, "Liker du pannekaker??");
