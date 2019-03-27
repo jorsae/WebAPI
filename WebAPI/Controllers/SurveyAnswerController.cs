@@ -10,7 +10,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
 
 namespace WebAPI.Controllers
 {
@@ -77,7 +76,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyAnswer.SurveyQuestion);
+            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyAnswer.SurveyQuestionId);
             Survey survey = await db.Surveys.FindAsync(surveyQuestion.SurveyId);
 
             if (!survey.IsActive())
