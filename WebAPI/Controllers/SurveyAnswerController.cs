@@ -82,7 +82,7 @@ namespace WebAPI.Controllers
 
             if (survey.IsActive())
             {
-                return StatusCode(HttpStatusCode.Forbidden);
+                return StatusCode(HttpStatusCode.Unauthorized); // 401
             }
 
             db.SurveyAnswers.Add(surveyAnswer);
