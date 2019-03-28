@@ -1,7 +1,9 @@
-﻿using Library.Model;
+﻿using Library.DataAccess;
+using Library.Model;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +13,21 @@ namespace WebAPI.Tests
     [TestFixture]
     public class SurveyTests
     {
+        private LibraryContext db;
         private Survey survey;
 
         [SetUp]
         public void SetupBeforeEachTest()
         {
-            survey = new Survey(1);
+            db = new LibraryContext();
+            survey = new Survey("test survey");
         }
 
         [Test]
-        public void Assert_survey_not_same_id()
+        public void Assert_ClosingDate_is_default_7days_after_creation()
         {
-            Survey survey2 = new Survey(1);
-
-            Assert.AreNotEqual(survey.Id, survey2.Id);
+            DateTime newDate = survey.CreationDate.AddDays(7);
+            Assert.True(newDate.Equals(survey.ClosingDate));
         }
     }
 }

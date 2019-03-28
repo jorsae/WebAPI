@@ -28,9 +28,9 @@ namespace Library.Model
 
         public Survey(string surveyTitle, DateTime? closingDate = null)
         {
-            ClosingDate = (closingDate == null) ? DateTime.Now.AddDays(7) : (DateTime)closingDate;
-            SurveyTitle = surveyTitle;
             CreationDate = DateTime.Now;
+            SurveyTitle = surveyTitle;
+            ClosingDate = (closingDate == null) ? CreationDate.AddDays(7) : (DateTime)closingDate;
         }
 
         public bool IsActive()
