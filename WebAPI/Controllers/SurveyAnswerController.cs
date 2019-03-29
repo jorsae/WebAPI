@@ -99,7 +99,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(surveyAnswer);
         }
 
         private bool SurveyAnswerExists(int id)

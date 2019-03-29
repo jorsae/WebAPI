@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
         /// <param name="survey">The survey.</param>
         /// <returns></returns>
         [HttpPut]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> PutSurvey(Survey survey)
         {
             if (!ModelState.IsValid)
@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return StatusCode(HttpStatusCode.Created);
+            return Ok(survey);
         }
 
         // PUT: api/survey/inactive/{surveyId}

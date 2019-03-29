@@ -63,7 +63,7 @@ namespace WebAPI.Controllers
         /// <param name="surveyQuestion">The survey question.</param>
         /// <returns></returns>
         [HttpPut]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(SurveyQuestion))]
         public async Task<IHttpActionResult> PutSurveyQuestion(SurveyQuestion surveyQuestion)
         {
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return StatusCode(HttpStatusCode.Created);
+            return Ok(surveyQuestion);
         }
 
         // DELETE: api/surveyquestion/{surveyquestion}
