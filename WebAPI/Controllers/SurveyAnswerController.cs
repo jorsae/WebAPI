@@ -61,7 +61,7 @@ namespace WebAPI.Controllers
             return Ok(surveyAnswers);
         }
 
-        // PUT: api/Survey/{survey}
+        // PUT: api/SurveyAnswer/{surveyAnswer}
         /// <summary>
         /// Puts the SurveyAnswer in database
         /// </summary>
@@ -99,7 +99,8 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return Ok(surveyAnswer);
+            // If you return Ok(surveyAnswer), you will get an infinite loop
+            return Ok();
         }
 
         private bool SurveyAnswerExists(int id)
