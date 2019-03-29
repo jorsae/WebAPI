@@ -14,6 +14,7 @@ namespace Library.Model
 
         public string Question { get; set; }
         public int QuestionNumber { get; set; }
+        [Required]
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
 

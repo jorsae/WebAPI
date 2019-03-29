@@ -12,6 +12,7 @@ namespace Library.Model
         [Key]
         public int SurveyAnswerId { get; set; }
         public int Answer { get; set; }
+        [Required]
         public int SurveyQuestionId { get; set; }
 
         public SurveyQuestion SurveyQuestion { get; set; }
