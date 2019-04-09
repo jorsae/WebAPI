@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Library.Model
 {
@@ -10,6 +12,7 @@ namespace Library.Model
         public int QuestionNumber { get; set; }
         [ForeignKey("Survey")]
         public int SurveyId { get; set; }
+        [IgnoreDataMember]
         public Survey Survey { get; set; }
 
         // Empty constructor for EntityFramework
