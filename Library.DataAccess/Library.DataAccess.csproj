@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LibraryContext.cs" />
-    <Compile Include="LibraryDBInitializer.cs" />
+    <Compile Include="DatabaseContext.cs" />
+    <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

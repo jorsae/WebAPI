@@ -3,9 +3,9 @@ using System.Data.Entity;
 
 namespace Library.DataAccess
 {
-    public class LibraryDBInitializer : DropCreateDatabaseIfModelChanges<LibraryContext>
+    public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<DatabaseContext>
     {
-        protected override void Seed(LibraryContext context)
+        protected override void Seed(DatabaseContext context)
         {
             Survey survey1 = new Survey("Arbeidsplass");
             SurveyQuestion surveyQuestion1 = new SurveyQuestion(survey1.SurveyId, 1, "Liker du arbeidsplassen din?");
