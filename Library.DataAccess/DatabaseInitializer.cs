@@ -3,9 +3,9 @@ using System.Data.Entity;
 
 namespace Library.DataAccess
 {
-    public class LibraryDBInitializer : DropCreateDatabaseIfModelChanges<LibraryContext>
+    public class DatabaseInitializer : DropCreateDatabaseIfModelChanges<DatabaseContext>
     {
-        protected override void Seed(LibraryContext context)
+        protected override void Seed(DatabaseContext context)
         {
             Survey survey1 = new Survey("Arbeidsplass");
             SurveyQuestion surveyQuestion1 = new SurveyQuestion(survey1.SurveyId, 1, "Liker du arbeidsplassen din?");
@@ -21,6 +21,21 @@ namespace Library.DataAccess
             SurveyAnswer survey2Answer3 = new SurveyAnswer(surveyQuestion3.SurveyQuestionId, 6);
             SurveyAnswer survey2Answer4 = new SurveyAnswer(surveyQuestion3.SurveyQuestionId, 10);
             SurveyAnswer survey2Answer5 = new SurveyAnswer(surveyQuestion3.SurveyQuestionId, 9);
+
+            // Adding survey1
+            /*
+            survey1.SurveyQuestions.Add(surveyQuestion1);
+            surveyQuestion1.SurveyAnswers.Add(survey1Answer1);
+            surveyQuestion1.SurveyAnswers.Add(survey1Answer2);
+
+            // Adding survey2
+            survey2.SurveyQuestions.Add(surveyQuestion2);
+            survey2.SurveyQuestions.Add(surveyQuestion3);
+            surveyQuestion2.SurveyAnswers.Add(survey2Answer1);
+            surveyQuestion2.SurveyAnswers.Add(survey2Answer2);
+            surveyQuestion3.SurveyAnswers.Add(survey2Answer3);
+            surveyQuestion3.SurveyAnswers.Add(survey2Answer4);
+            surveyQuestion3.SurveyAnswers.Add(survey2Answer5);*/
 
             context.Surveys.Add(survey1);
             context.Surveys.Add(survey2);

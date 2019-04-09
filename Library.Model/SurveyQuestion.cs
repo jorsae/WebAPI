@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library.Model
 {
     public class SurveyQuestion
     {
-        [Key]
         public int SurveyQuestionId { get; set; }
 
         public string Question { get; set; }
         public int QuestionNumber { get; set; }
-        [Required]
+        [ForeignKey("Survey")]
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
-
-        public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
         // Empty constructor for EntityFramework
         public SurveyQuestion()

@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library.Model
 {
     public class SurveyAnswer
     {
-        [Key]
         public int SurveyAnswerId { get; set; }
         public int Answer { get; set; }
-        [Required]
-        public int SurveyQuestionId { get; set; }
 
+        [ForeignKey("SurveyQuestion")]
+        public int SurveyQuestionId { get; set; }
         public SurveyQuestion SurveyQuestion { get; set; }
 
         // Empty constructor for EntityFramework
