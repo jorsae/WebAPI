@@ -1,12 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.Serialization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.Model
 {
     public class SurveyAnswer
     {
         public int SurveyAnswerId { get; set; }
+        [Required]
+        [Range(1, 10)]
         public int Answer { get; set; }
 
         [ForeignKey("SurveyQuestion")]
