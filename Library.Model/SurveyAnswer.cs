@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
 
 namespace Library.Model
 {
@@ -11,10 +7,12 @@ namespace Library.Model
     {
         [Key]
         public int SurveyAnswerId { get; set; }
+        [Required]
+        [Range(1, 10)]
         public int Answer { get; set; }
         [Required]
         public int SurveyQuestionId { get; set; }
-
+        [IgnoreDataMember]
         public SurveyQuestion SurveyQuestion { get; set; }
 
         // Empty constructor for EntityFramework

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Library.Model
 {
@@ -11,13 +8,17 @@ namespace Library.Model
     {
         [Key]
         public int SurveyQuestionId { get; set; }
-
+        [Required]
+        [MaxLength(255)]
         public string Question { get; set; }
+        [Required]
+        [Range(1, 3)]
         public int QuestionNumber { get; set; }
         [Required]
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
 
+        [IgnoreDataMember]
         public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
         // Empty constructor for EntityFramework

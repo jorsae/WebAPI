@@ -13,13 +13,13 @@ namespace WebAPI.Tests
     [TestFixture]
     public class SurveyTests
     {
-        private LibraryContext db;
+        private DatabaseContext db;
         private Survey survey;
 
         [SetUp]
         public void SetupBeforeEachTest()
         {
-            db = new LibraryContext();
+            db = new DatabaseContext();
             survey = new Survey("test survey");
         }
 

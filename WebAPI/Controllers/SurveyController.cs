@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
 {
     public class SurveyController : ApiController
     {
-        private LibraryContext db = new LibraryContext();
+        private DatabaseContext db = new DatabaseContext();
 
         // GET: api/survey
         public IQueryable<Survey> GetSurveys()
