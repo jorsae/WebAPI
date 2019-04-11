@@ -86,6 +86,11 @@ namespace WebAPI.Controllers
             }
 
             Survey oldSurvey = await db.Surveys.FindAsync(survey.SurveyId);
+            if(oldSurvey == null)
+            {
+                return StatusCode(HttpStatusCode.NotFound);
+            }
+
             oldSurvey.SurveyTitle = survey.SurveyTitle;
             oldSurvey.CreationDate = survey.CreationDate;
             oldSurvey.ClosingDate = survey.ClosingDate;
