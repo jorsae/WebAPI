@@ -18,7 +18,7 @@ namespace Library.Model
         public int SurveyId { get; set; }
         [IgnoreDataMember]
         public Survey Survey { get; set; }
-
+        [IgnoreDataMember]
         public virtual List<SurveyAnswer> SurveyAnswers { get; set; } = new List<SurveyAnswer>();
 
         // Empty constructor for EntityFramework
