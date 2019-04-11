@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
             int questionNumber = db.SurveyQuestions
                                 .Where(sq => sq.SurveyId == surveyQuestion.SurveyId)
                                 .Select(sq => sq.QuestionNumber)
-                                .DefaultIfEmpty(1)
+                                .DefaultIfEmpty(0)
                                 .Max() + 1;
             if(questionNumber > 3)
             {
