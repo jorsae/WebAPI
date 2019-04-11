@@ -75,8 +75,11 @@ namespace WebAPI.Controllers
                                 .Where(sq => sq.SurveyId == surveyQuestion.SurveyId)
                                 .Select(sq => sq.QuestionNumber)
                                 .DefaultIfEmpty(1)
-                                .Max();
-
+                                .Max() + 1;
+            if(questionNumber > 3)
+            {
+                return StatusCode(HttpStatusCode.Forbidden);
+            }
             surveyQuestion.QuestionNumber = questionNumber;
             db.SurveyQuestions.Add(surveyQuestion);
 
