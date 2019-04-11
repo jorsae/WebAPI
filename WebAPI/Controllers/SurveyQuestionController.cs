@@ -71,6 +71,13 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            int questionNumber = db.SurveyQuestions
+                                .Where(sq => sq.SurveyId == surveyQuestion.SurveyId)
+                                .Select(sq => sq.QuestionNumber)
+                                .DefaultIfEmpty(1)
+                                .Max();
+
+            surveyQuestion.QuestionNumber = questionNumber;
             db.SurveyQuestions.Add(surveyQuestion);
 
             try
