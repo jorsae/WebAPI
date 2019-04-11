@@ -76,6 +76,35 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
+        [HttpPost]
+        [ResponseType(typeof(Survey))]
+        public async Task<IHttpActionResult> PostSurveyChange(Survey survey)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); // 400
+            }
+
+            Survey oldSurvey = await db.Surveys.FindAsync(survey.SurveyId);
+            oldSurvey.SurveyTitle = survey.SurveyTitle;
+            oldSurvey.CreationDate = survey.CreationDate;
+            oldSurvey.ClosingDate = survey.ClosingDate;
+            db.Entry(oldSurvey).State = EntityState.Modified;
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            catch (Exception)
+            {
+                return StatusCode(HttpStatusCode.InternalServerError);
+            }
+            return Ok(oldSurvey);
+        }
+
         // PUT: api/survey/inactive/{surveyId}
         [Route("api/survey/inactive/{surveyId}")]
         [HttpPut]
