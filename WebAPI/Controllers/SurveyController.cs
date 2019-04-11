@@ -92,7 +92,6 @@ namespace WebAPI.Controllers
             }
 
             oldSurvey.SurveyTitle = survey.SurveyTitle;
-            oldSurvey.CreationDate = survey.CreationDate;
             oldSurvey.ClosingDate = survey.ClosingDate;
             db.Entry(oldSurvey).State = EntityState.Modified;
             try
