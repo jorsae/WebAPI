@@ -6,6 +6,7 @@ namespace Library.Model
 {
     public class SurveyAnswer
     {
+        [Key]
         public int SurveyAnswerId { get; set; }
         [Required]
         [Range(1, 10)]

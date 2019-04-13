@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
 
 namespace Library.Model
 {
@@ -16,9 +14,6 @@ namespace Library.Model
         public DateTime CreationDate { get; set; }
 
         public DateTime ClosingDate { get; set; }
-
-        [IgnoreDataMember]
-        public virtual ICollection<SurveyQuestion> SurveyQuestions { get; set; } = new List<SurveyQuestion>();
 
         // Empty constructor for EntityFramework
         public Survey()

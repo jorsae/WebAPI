@@ -1,7 +1,5 @@
 ﻿using Library.Model;
-using System;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Library.DataAccess
 {
@@ -15,24 +13,6 @@ namespace Library.DataAccess
         {
             Configuration.ProxyCreationEnabled = false;
             Database.SetInitializer(new DatabaseInitializer());
-        }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
-
-            modelBuilder.Entity<Survey>()
-                .HasMany(survey => survey.SurveyQuestions)
-                .WithRequired(surveyQuestion => surveyQuestion.Survey)
-                .HasForeignKey<int>(surveyQuestion => surveyQuestion.SurveyId);
-
-            modelBuilder.Entity<SurveyQuestion>()
-                .HasMany(surveyQuestion => surveyQuestion.SurveyAnswers)
-                .WithRequired(surveyAnswer => surveyAnswer.SurveyQuestion)
-                .HasForeignKey<int>(surveyAnwer => surveyAnwer.SurveyQuestionId);
-
-            base.OnModelCreating(modelBuilder);
         }
     }
 }
