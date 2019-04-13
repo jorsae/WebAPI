@@ -51,5 +51,23 @@ namespace WebAPI.Tests
             var getContentResult = result as OkNegotiatedContentResult<Survey>;
             Assert.IsNotNull(getContentResult);
         }
+
+        [Test]
+        public async Task Assert_post_change_survey()
+        {
+            IHttpActionResult actionResult = await surveyController.PutSurvey(survey);
+            var putResult = actionResult as OkNegotiatedContentResult<Survey>;
+            Assert.IsNotNull(putResult);
+
+            survey.SurveyTitle = "asd";
+            survey.ClosingDate = DateTime.Now;
+            IHttpActionResult changeResult = await surveyController.PostSurveyChange(survey);
+
+            IHttpActionResult newResult = await surveyController.GetSurveyById(survey.SurveyId);
+            var result = newResult as OkNegotiatedContentResult<Survey>;
+            Survey newSurvey = result.Content;
+            Assert.AreEqual(survey, newSurvey);
+
+        }
     }
 }
