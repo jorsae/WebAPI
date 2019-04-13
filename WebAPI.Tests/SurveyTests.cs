@@ -1,11 +1,6 @@
-﻿using Library.DataAccess;
-using Library.Model;
+﻿using Library.Model;
 using NUnit.Framework;
 using System;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
-using WebAPI.Controllers;
 
 namespace WebAPI.Tests
 {
