@@ -2,6 +2,7 @@
 using Library.Model;
 using NUnit.Framework;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Http;
@@ -26,7 +27,7 @@ namespace WebAPI.Tests
         }
 
         [SetUp]
-        public void SetupBeforeEachTest()
+        public void SetUp()
         {
             survey = new Survey("Test");
             surveyController = new SurveyController();
@@ -35,9 +36,8 @@ namespace WebAPI.Tests
         [Test]
         public async Task Assert_put_survey()
         {
-            IHttpActionResult actionResult = await surveyController.PutSurvey(survey);
-            var contentResult = actionResult as OkNegotiatedContentResult<Survey>;
-            Assert.IsNotNull(contentResult);
+            IHttpActionResult result = await surveyController.PutSurvey(survey);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<Survey>), result);
         }
 
         [Test]
@@ -48,8 +48,7 @@ namespace WebAPI.Tests
             Assert.IsNotNull(contentResult);
 
             IHttpActionResult result = await surveyController.GetSurveyById(survey.SurveyId);
-            var getContentResult = result as OkNegotiatedContentResult<Survey>;
-            Assert.IsNotNull(getContentResult);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<Survey>), result);
         }
 
         [Test]
@@ -59,15 +58,47 @@ namespace WebAPI.Tests
             var putResult = actionResult as OkNegotiatedContentResult<Survey>;
             Assert.IsNotNull(putResult);
 
+            // Make changes to survey
             survey.SurveyTitle = "asd";
             survey.ClosingDate = DateTime.Now;
-            IHttpActionResult changeResult = await surveyController.PostSurveyChange(survey);
+            await surveyController.PostSurveyChange(survey);
 
             IHttpActionResult newResult = await surveyController.GetSurveyById(survey.SurveyId);
             var result = newResult as OkNegotiatedContentResult<Survey>;
             Survey newSurvey = result.Content;
             Assert.AreEqual(survey, newSurvey);
+        }
 
+        [Test]
+        public async Task Assert_make_surve_inactive()
+        {
+            Survey surveyTest = new Survey("survey");
+
+            IHttpActionResult actionResult = await surveyController.PutSurvey(surveyTest);
+            var putResult = actionResult as OkNegotiatedContentResult<Survey>;
+            Survey oldSurvey = putResult.Content;
+            Assert.True(oldSurvey.IsActive());
+
+            // Make survey inactive
+            await surveyController.SurveyInactive(surveyTest.SurveyId);
+
+            IHttpActionResult newResult = await surveyController.GetSurveyById(surveyTest.SurveyId);
+            var result = newResult as OkNegotiatedContentResult<Survey>;
+            Survey newSurvey = result.Content;
+            Assert.False(newSurvey.IsActive());
+        }
+
+        [Test]
+        public async Task Assert_survey_is_deleted()
+        {
+            // add survey
+            IHttpActionResult actionResult = await surveyController.PutSurvey(survey);
+            var contentResult = actionResult as OkNegotiatedContentResult<Survey>;
+            Assert.IsNotNull(contentResult);
+
+            // Delete survey
+            IHttpActionResult result = await surveyController.DeleteSurvey(survey.SurveyId);
+            Assert.IsInstanceOf(typeof(OkResult), result);
         }
     }
 }

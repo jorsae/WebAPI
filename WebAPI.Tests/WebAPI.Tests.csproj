@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="SurveyControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurveyQuestionControllerTests.cs" />
     <Compile Include="SurveyTests.cs" />
   </ItemGroup>
   <ItemGroup>
