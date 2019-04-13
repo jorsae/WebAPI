@@ -48,8 +48,8 @@ namespace WebAPI.Tests
             Assert.IsNotNull(contentResult);
 
             IHttpActionResult result = await surveyController.GetSurveyById(survey.SurveyId);
-            var getContentResult = actionResult as OkNegotiatedContentResult<Survey>;
-            Assert.NotNull(getContentResult);
+            var getContentResult = result as OkNegotiatedContentResult<Survey>;
+            Assert.IsNotNull(getContentResult);
         }
     }
 }
