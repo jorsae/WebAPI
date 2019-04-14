@@ -24,18 +24,13 @@ namespace WebAPI.Controllers
             return db.Surveys;
         }
 
-        // GET: api/survey/5
-        /// <summary>
-        /// Gets the survey by id
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        [Route("api/survey/{id}")]
+        [Route("api/survey/{SurveyGuid}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
-        public async Task<IHttpActionResult> GetSurveyById(int id)
+        public async Task<IHttpActionResult> GetSurveyByGuid(string surveyGuid)
         {
-            Survey survey = await db.Surveys.FindAsync(id);
+            Survey survey = await db.Surveys.Where(s => s.SurveyGuid == surveyGuid)
+                                                    .FirstAsync();
 
             if (survey == null)
                 return StatusCode(HttpStatusCode.NoContent);
@@ -43,13 +38,18 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
-        [Route("api/survey/guid/{SurveyGuid}")]
+        // GET: api/survey/5
+        /// <summary>
+        /// Gets the survey by id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [Route("api/survey/id/{id}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
-        public async Task<IHttpActionResult> GetSurveyByGuid(string surveyGuid)
+        public async Task<IHttpActionResult> GetSurveyById(int id)
         {
-            Survey survey = await db.Surveys.Where(s => s.SurveyGuid == surveyGuid)
-                                                    .FirstAsync();
+            Survey survey = await db.Surveys.FindAsync(id);
 
             if (survey == null)
                 return StatusCode(HttpStatusCode.NoContent);
