@@ -99,8 +99,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            // If you return Ok(surveyAnswer), you will get an infinite loop
-            return Ok();
+            return Ok(surveyAnswer);
         }
 
         private bool SurveyAnswerExists(int id)

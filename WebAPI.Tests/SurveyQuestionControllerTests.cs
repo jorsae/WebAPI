@@ -13,14 +13,6 @@ namespace WebAPI.Tests
     [TestFixture]
     class SurveyQuestionControllerTests
     {
-        private class SurveyQuestionStats
-        {
-            public int Count { get; set; }
-            public int Max { get; set; }
-            public int Min { get; set; }
-            public double Average { get; set; }
-        }
-
         private DatabaseContext context;
         private SurveyQuestionController sqController;
         private SurveyController surveyController;
@@ -99,21 +91,6 @@ namespace WebAPI.Tests
 
             IHttpActionResult result = await sqController.DeleteSurveyQuestion(surveyQuestion.SurveyQuestionId);
             Assert.IsInstanceOf(typeof(OkResult), result);
-        }
-
-        [Test]
-        public async Task Assert_get_surveyquestion_stats()
-        {
-            IHttpActionResult putResult = await sqController.PutSurveyQuestion(surveyQuestion);
-            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<SurveyQuestion>), putResult);
-
-            SurveyAnswer surveyAnswer = new SurveyAnswer(surveyQuestion.SurveyQuestionId, 3);
-            SurveyAnswerController saController = new SurveyAnswerController();
-            IHttpActionResult putAnswerResult = await saController.PutSurveyAnswer(surveyAnswer);
-            Assert.IsInstanceOf(typeof(OkResult), putAnswerResult);
-
-            IHttpActionResult actionResult = sqController.GetSurveyQuestionStats(surveyQuestion.SurveyQuestionId);
-            Assert.NotNull(actionResult);
         }
     }
 }
