@@ -10,6 +10,9 @@ namespace Library.Model
         [Required]
         [MaxLength(64)]
         public string SurveyTitle { get; set; }
+
+        public string SurveyGuid { get; set; }
+
         [Required]
         public DateTime CreationDate { get; set; }
 
@@ -18,7 +21,7 @@ namespace Library.Model
         // Empty constructor for EntityFramework
         public Survey()
         {
-
+            SurveyGuid = Guid.NewGuid().ToString();
         }
 
         public Survey(string surveyTitle, DateTime? closingDate = null)
@@ -26,6 +29,7 @@ namespace Library.Model
             CreationDate = DateTime.Now;
             SurveyTitle = surveyTitle;
             ClosingDate = (closingDate == null) ? CreationDate.AddDays(7) : (DateTime)closingDate;
+            SurveyGuid = Guid.NewGuid().ToString();
         }
 
         public bool IsActive()

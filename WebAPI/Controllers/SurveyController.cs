@@ -43,6 +43,20 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
+        [Route("api/survey/{SurveyGuid}")]
+        [HttpGet]
+        [ResponseType(typeof(Survey))]
+        public async Task<IHttpActionResult> GetSurveyByGuid(string surveyGuid)
+        {
+            Survey survey = await db.Surveys.Where(s => s.SurveyGuid == surveyGuid)
+                                                    .FirstAsync();
+
+            if (survey == null)
+                return StatusCode(HttpStatusCode.NoContent);
+
+            return Ok(survey);
+        }
+
         // PUT: api/survey/{survey}
         /// <summary>
         /// Puts survey to database

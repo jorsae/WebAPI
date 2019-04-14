@@ -52,6 +52,17 @@ namespace WebAPI.Tests
         }
 
         [Test]
+        public async Task Assert_get_survey_by_guid()
+        {
+            IHttpActionResult actionResult = await surveyController.PutSurvey(survey);
+            var contentResult = actionResult as OkNegotiatedContentResult<Survey>;
+            Assert.IsNotNull(contentResult);
+
+            IHttpActionResult result = await surveyController.GetSurveyByGuid(survey.SurveyGuid);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<Survey>), result);
+        }
+
+        [Test]
         public async Task Assert_post_change_survey()
         {
             IHttpActionResult actionResult = await surveyController.PutSurvey(survey);
