@@ -131,7 +131,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return StatusCode(HttpStatusCode.Created);
+            return Ok();
         }
 
         [Route("api/surveyquestion/stats/{surveyQuestionId}")]
