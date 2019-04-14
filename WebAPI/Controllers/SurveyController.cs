@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
-        [Route("api/survey/{SurveyGuid}")]
+        [Route("api/survey/guid/{SurveyGuid}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> GetSurveyByGuid(string surveyGuid)
