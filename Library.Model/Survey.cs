@@ -10,7 +10,7 @@ namespace Library.Model
         [Required]
         [MaxLength(64)]
         public string SurveyTitle { get; set; }
-
+        [Required]
         public string SurveyGuid { get; set; }
 
         [Required]
