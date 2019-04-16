@@ -127,7 +127,7 @@ namespace WebAPI.Controllers
         [Route("api/survey/inactive/{surveyId}")]
         [HttpPost]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> SurveyInactive(int surveyId)
+        public async Task<IHttpActionResult> PostSurveyInactive(int surveyId)
         {
             if (!ModelState.IsValid)
             {
@@ -194,16 +194,6 @@ namespace WebAPI.Controllers
             }
 
             base.Dispose(disposing);
-        }
-
-        /// <summary>
-        /// returns true if survey exists. False otherwise.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private bool SurveyExists(int id)
-        {
-            return db.Surveys.Count(survey => survey.SurveyId == id) > 0;
         }
     }
 }

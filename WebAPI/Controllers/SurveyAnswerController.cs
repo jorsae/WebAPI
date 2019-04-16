@@ -101,10 +101,5 @@ namespace WebAPI.Controllers
 
             return Ok(surveyAnswers);
         }
-
-        private bool SurveyAnswerExists(int id)
-        {
-            return db.SurveyAnswers.Count(surveyAnswer => surveyAnswer.SurveyAnswerId == id) > 0;
-        }
     }
 }

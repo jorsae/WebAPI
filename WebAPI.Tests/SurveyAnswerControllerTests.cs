@@ -1,6 +1,7 @@
 ﻿using Library.DataAccess;
 using Library.Model;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -44,8 +45,12 @@ namespace WebAPI.Tests
         [Test]
         public async Task Assert_put_surveyanswer()
         {
-            IHttpActionResult result = await saController.PutSurveyAnswer(surveyAnswer);
-            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<SurveyAnswer>), result);
+            List<SurveyAnswer> surveyAnswers = new List<SurveyAnswer>
+            {
+                surveyAnswer
+            };
+            IHttpActionResult result = await saController.PutSurveyAnswers(surveyAnswers);
+            Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<IEnumerable<SurveyAnswer>>), result);
         }
     }
 }

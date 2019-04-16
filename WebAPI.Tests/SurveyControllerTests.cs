@@ -2,9 +2,7 @@
 using Library.Model;
 using NUnit.Framework;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Transactions;
 using System.Web.Http;
 using System.Web.Http.Results;
 using WebAPI.Controllers;
@@ -91,7 +89,7 @@ namespace WebAPI.Tests
             Assert.True(oldSurvey.IsActive());
 
             // Make survey inactive
-            await surveyController.SurveyInactive(surveyTest.SurveyId);
+            await surveyController.PostSurveyInactive(surveyTest.SurveyId);
 
             IHttpActionResult newResult = await surveyController.GetSurveyById(surveyTest.SurveyId);
             var result = newResult as OkNegotiatedContentResult<Survey>;
