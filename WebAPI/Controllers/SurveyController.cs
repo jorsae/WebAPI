@@ -125,7 +125,7 @@ namespace WebAPI.Controllers
 
         // PUT: api/survey/inactive/{surveyId}
         [Route("api/survey/inactive/{surveyId}")]
-        [HttpPut]
+        [HttpPost]
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> SurveyInactive(int surveyId)
         {
@@ -148,7 +148,7 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
-            return StatusCode(HttpStatusCode.Created);
+            return Ok();
         }
 
         // DELETE: api/survey/{survey}
