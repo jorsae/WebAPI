@@ -18,6 +18,8 @@ namespace WebAPI.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: api/SurveyAnswer
+        [HttpGet]
+        [Route("api/surveyanswer/")]
         public IQueryable<SurveyAnswer> GetSurveyAnswers()
         {
             return db.SurveyAnswers;
@@ -61,30 +63,28 @@ namespace WebAPI.Controllers
             return Ok(surveyAnswers);
         }
 
-        // PUT: api/SurveyAnswer/{surveyAnswer}
-        /// <summary>
-        /// Puts the SurveyAnswer in database
-        /// </summary>
-        /// <param name="surveyAnswer">The survey answer.</param>
-        /// <returns></returns>
+        [Route("api/surveyanswer/")]
         [HttpPut]
-        [ResponseType(typeof(SurveyAnswer))]
-        public async Task<IHttpActionResult> PutSurveyAnswer(SurveyAnswer surveyAnswer)
+        [ResponseType(typeof(IEnumerable<SurveyAnswer>))]
+        public async Task<IHttpActionResult> PutSurveyAnswers(IEnumerable<SurveyAnswer> surveyAnswers)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(surveyAnswer.SurveyQuestionId);
-            Survey survey = await db.Surveys.FindAsync(surveyQuestion.SurveyId);
-
-            if (!survey.IsActive())
+            foreach(SurveyAnswer answer in surveyAnswers)
             {
-                return StatusCode(HttpStatusCode.Unauthorized); // 401
-            }
+                SurveyQuestion surveyQuestion = await db.SurveyQuestions.FindAsync(answer.SurveyQuestionId);
+                Survey survey = await db.Surveys.FindAsync(surveyQuestion.SurveyId);
 
-            db.SurveyAnswers.Add(surveyAnswer);
+                if (!survey.IsActive())
+                {
+                    return StatusCode(HttpStatusCode.Unauthorized); // 401
+                }
+
+                db.SurveyAnswers.Add(answer);
+            }
 
             try
             {
@@ -99,12 +99,7 @@ namespace WebAPI.Controllers
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
 
-            return Ok(surveyAnswer);
-        }
-
-        private bool SurveyAnswerExists(int id)
-        {
-            return db.SurveyAnswers.Count(surveyAnswer => surveyAnswer.SurveyAnswerId == id) > 0;
+            return Ok(surveyAnswers);
         }
     }
 }

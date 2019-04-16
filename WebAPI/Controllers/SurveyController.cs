@@ -24,7 +24,13 @@ namespace WebAPI.Controllers
             return db.Surveys;
         }
 
-        [Route("api/survey/{SurveyGuid}")]
+        // GET: api/survey/5
+        /// <summary>
+        /// Gets the survey by id
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        [Route("api/survey/{id}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> GetSurveyByGuid(string surveyGuid)
@@ -125,9 +131,9 @@ namespace WebAPI.Controllers
 
         // PUT: api/survey/inactive/{surveyId}
         [Route("api/survey/inactive/{surveyId}")]
-        [HttpPut]
+        [HttpPost]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> SurveyInactive(int surveyId)
+        public async Task<IHttpActionResult> PostSurveyInactive(int surveyId)
         {
             if (!ModelState.IsValid)
             {
@@ -148,7 +154,7 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
-            return StatusCode(HttpStatusCode.Created);
+            return Ok();
         }
 
         // DELETE: api/survey/{survey}
@@ -194,16 +200,6 @@ namespace WebAPI.Controllers
             }
 
             base.Dispose(disposing);
-        }
-
-        /// <summary>
-        /// returns true if survey exists. False otherwise.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
-        /// <returns></returns>
-        private bool SurveyExists(int id)
-        {
-            return db.Surveys.Count(survey => survey.SurveyId == id) > 0;
         }
     }
 }

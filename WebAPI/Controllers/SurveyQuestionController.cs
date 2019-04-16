@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        [Route("api/surveyquestion/{surveyQuestionId}")]
+        [Route("api/surveyquestion/{surveyQuestionId:int}")]
         [HttpDelete]
         [ResponseType(typeof(SurveyQuestion))]
         public async Task<IHttpActionResult> DeleteSurveyQuestion(int surveyQuestionId)
@@ -173,11 +173,6 @@ namespace WebAPI.Controllers
             }
 
             base.Dispose(disposing);
-        }
-
-        private bool SurveyQuestionExists(int id)
-        {
-            return db.SurveyQuestions.Count(surveyQuestion => surveyQuestion.SurveyQuestionId == id) > 0;
         }
     }
 }
