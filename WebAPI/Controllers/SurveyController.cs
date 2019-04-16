@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        [Route("api/survey/{id}")]
+        [Route("api/survey/{id:int}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> GetSurveyById(int id)
