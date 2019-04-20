@@ -154,15 +154,18 @@ namespace WebAPI.Controllers
         [Route("api/surveyquestion/frequency/{surveyQuestionId}")]
         [HttpGet]
         [ResponseType(typeof(float))]
-        public IHttpActionResult GetSurveyQuestionFrequency(int surveyQuestionId)
+        public IHttpActionResult GetSurveyAnswerFrequency(int surveyQuestionId)
         {
-            IEnumerable<int> mostFrequent = db.SurveyAnswers
-                       .Where(a => a.SurveyQuestionId == surveyQuestionId)
-                       .GroupBy(i => i.Answer)
-                       .OrderByDescending(g => g.Count())
-                       .Take(10)
-                       .Select(g => g.Key);
-            return Ok(mostFrequent);
+            var frequencyStats = from answer in db.SurveyAnswers
+                    where answer.SurveyQuestionId == surveyQuestionId
+                    group answer by answer.Answer into g
+                    let surveyAnswer = new
+                    {
+                        Answer = g.Key,
+                        Frequency = g.Count()
+                    }
+                    select surveyAnswer;
+            return Ok(frequencyStats);
         }
 
         protected override void Dispose(bool disposing)
