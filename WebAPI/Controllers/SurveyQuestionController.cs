@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
         [Route("api/surveyquestion/surveyid/{surveyId}")]
         [HttpGet]
         [ResponseType(typeof(SurveyQuestion))]
-        public async Task<IHttpActionResult> GetSurveyQuestionBySurveyId(int surveyId)
+        public async Task<IHttpActionResult> GetSurveyQuestionsBySurveyId(int surveyId)
         {
             List<SurveyQuestion> surveyQuestions = await (from surveyQuestion in db.SurveyQuestions
                                                     where surveyQuestion.SurveyId == surveyId
