@@ -116,6 +116,14 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
+            List<SurveyQuestion> surveyQuestionsChangeNumber = await db.SurveyQuestions
+                                                                    .Where(sq => sq.QuestionNumber <= surveyQuestion.QuestionNumber)
+                                                                    .ToListAsync();
+            foreach(SurveyQuestion sq in surveyQuestionsChangeNumber)
+            {
+                sq.QuestionNumber--;
+                db.Entry(sq).State = EntityState.Modified;
+            }
             db.SurveyQuestions.Remove(surveyQuestion);
 
             try
