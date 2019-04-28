@@ -24,7 +24,7 @@ namespace WebAPI.Tests
         public void OneTimeSetUp()
         {
             context = new DatabaseContext();
-            context.Database.Connection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebApi_TestDatabase2;Integrated Security=True;Pooling=False";
+            context.Database.Connection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebApi_TestDatabase;Integrated Security=True;Pooling=False";
             context.Database.CreateIfNotExists();
         }
 

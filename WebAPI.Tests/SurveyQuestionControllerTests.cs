@@ -22,7 +22,7 @@ namespace WebAPI.Tests
         public void OneTimeSetUp()
         {
             context = new DatabaseContext();
-            context.Database.Connection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebApi_TestDatabase2;Integrated Security=True;Pooling=False";
+            context.Database.Connection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebApi_TestDatabase;Integrated Security=True;Pooling=False";
             context.Database.CreateIfNotExists();
         }
 
@@ -69,7 +69,7 @@ namespace WebAPI.Tests
             IHttpActionResult result2 = await sqController.PutSurveyQuestion(new SurveyQuestion(survey.SurveyId, 1, "asd"));
             Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<SurveyQuestion>), result2);
 
-            IHttpActionResult testResult = await sqController.GetSurveyQuestionBySurveyId(surveyQuestion.SurveyId);
+            IHttpActionResult testResult = await sqController.GetSurveyQuestionsBySurveyId(surveyQuestion.SurveyId);
             Assert.IsInstanceOf(typeof(OkNegotiatedContentResult<List<SurveyQuestion>>), testResult);
         }
 
