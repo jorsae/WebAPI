@@ -117,7 +117,8 @@ namespace WebAPI.Controllers
             }
 
             List<SurveyQuestion> surveyQuestionsChangeNumber = await db.SurveyQuestions
-                                                                    .Where(sq => sq.QuestionNumber <= surveyQuestion.QuestionNumber)
+                                                                    .Where(sq => sq.SurveyId == surveyQuestion.SurveyId &&
+                                                                            sq.QuestionNumber <= surveyQuestion.QuestionNumber)                                                                    
                                                                     .ToListAsync();
             foreach(SurveyQuestion sq in surveyQuestionsChangeNumber)
             {
