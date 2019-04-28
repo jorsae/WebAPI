@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         {
             List<SurveyQuestion> surveyQuestions = await (from surveyQuestion in db.SurveyQuestions
                                                     where surveyQuestion.SurveyId == surveyId
-                                                    select surveyQuestion).ToListAsync();
+                                                    select surveyQuestion).OrderBy(sq => sq.QuestionNumber).ToListAsync();
             if (surveyQuestions.Count <= 0)
                 return StatusCode(HttpStatusCode.NoContent);
 
