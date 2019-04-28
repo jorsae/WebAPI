@@ -122,7 +122,7 @@ namespace WebAPI.Controllers
                                                                     .ToListAsync();
             foreach(SurveyQuestion sq in surveyQuestionsChangeNumber)
             {
-                sq.QuestionNumber--;
+                sq.QuestionNumber = sq.QuestionNumber--;
                 db.Entry(sq).State = EntityState.Modified;
             }
             db.SurveyQuestions.Remove(surveyQuestion);
