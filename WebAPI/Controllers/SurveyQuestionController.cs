@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -116,13 +117,13 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            List<SurveyQuestion> surveyQuestionsChangeNumber = await db.SurveyQuestions
+            List < SurveyQuestion > surveyQuestionsChangeNumber = await db.SurveyQuestions
                                                                     .Where(sq => sq.SurveyId == surveyQuestion.SurveyId &&
-                                                                            sq.QuestionNumber <= surveyQuestion.QuestionNumber)                                                                    
+                                                                            sq.QuestionNumber > surveyQuestion.QuestionNumber)
                                                                     .ToListAsync();
-            foreach(SurveyQuestion sq in surveyQuestionsChangeNumber)
+            foreach (SurveyQuestion sq in surveyQuestionsChangeNumber)
             {
-                sq.QuestionNumber = sq.QuestionNumber--;
+                --sq.QuestionNumber;
                 db.Entry(sq).State = EntityState.Modified;
             }
             db.SurveyQuestions.Remove(surveyQuestion);
