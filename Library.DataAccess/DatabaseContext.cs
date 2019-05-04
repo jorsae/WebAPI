@@ -12,6 +12,7 @@ namespace Library.DataAccess
         public DatabaseContext()
         {
             Configuration.ProxyCreationEnabled = false;
+            Database.Connection.ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebApi_TestDatabase;Integrated Security=True;Pooling=False";
             Database.SetInitializer(new DatabaseInitializer());
         }
     }

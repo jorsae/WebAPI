@@ -12,8 +12,6 @@ namespace Library.Model
         public string SurveyTitle { get; set; }
         [Required]
         public string SurveyGuid { get; set; }
-
-        [Required]
         public DateTime CreationDate { get; set; }
 
         public DateTime ClosingDate { get; set; }
