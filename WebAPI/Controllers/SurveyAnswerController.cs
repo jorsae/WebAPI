@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -92,6 +93,7 @@ namespace WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
+                Debug.WriteLine("DbUpdateConcurrencyException");
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
             catch (Exception)

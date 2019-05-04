@@ -22,6 +22,8 @@ namespace Library.Model
         public Survey()
         {
             SurveyGuid = Guid.NewGuid().ToString();
+            CreationDate = DateTime.Now;
+            ClosingDate = CreationDate.AddDays(7);
         }
 
         public Survey(string surveyTitle, DateTime? closingDate = null)
