@@ -148,7 +148,7 @@ namespace WebAPI.Controllers
             {
                 return StatusCode(HttpStatusCode.InternalServerError);
             }
-            return Ok();
+            return Ok(survey);
         }
 
         // DELETE: api/survey/{survey}
