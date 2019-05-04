@@ -11,8 +11,6 @@ namespace Library.Model
         [Required]
         [MaxLength(255)]
         public string Question { get; set; }
-        [Required]
-        [Range(1, 3)]
         public int QuestionNumber { get; set; }
 
         [ForeignKey("Survey")]
