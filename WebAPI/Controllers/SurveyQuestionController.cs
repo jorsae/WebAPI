@@ -75,10 +75,12 @@ namespace WebAPI.Controllers
                                 .Select(sq => sq.QuestionNumber)
                                 .DefaultIfEmpty(0)
                                 .Max() + 1;
-            if(questionNumber > 3)
+
+            if (questionNumber > Settings.MaxQuestionsInSurvey)
             {
                 return StatusCode(HttpStatusCode.Forbidden);
             }
+
             surveyQuestion.QuestionNumber = questionNumber;
             db.SurveyQuestions.Add(surveyQuestion);
 
