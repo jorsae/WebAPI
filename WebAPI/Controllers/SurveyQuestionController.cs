@@ -166,15 +166,15 @@ namespace WebAPI.Controllers
         [ResponseType(typeof(float))]
         public IHttpActionResult GetSurveyAnswerFrequency(int surveyQuestionId)
         {
-            var frequencyStats = from answer in db.SurveyAnswers
-                    where answer.SurveyQuestionId == surveyQuestionId
-                    group answer by answer.Answer into g
-                    let surveyAnswer = new
-                    {
-                        Answer = g.Key,
-                        Frequency = g.Count()
-                    }
-                    select surveyAnswer;
+            var frequencyStats = (from answer in db.SurveyAnswers
+                                  where answer.SurveyQuestionId == surveyQuestionId
+                                  group answer by answer.Answer into g
+                                  let surveyAnswer = new
+                                  {
+                                      Answer = g.Key,
+                                      Frequency = g.Count()
+                                  }
+                                  select surveyAnswer).OrderBy(s => s.Answer);
             return Ok(frequencyStats);
         }
 
