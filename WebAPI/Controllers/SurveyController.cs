@@ -1,7 +1,6 @@
 ﻿using Library.DataAccess;
 using Library.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -10,7 +9,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
 
 namespace WebAPI.Controllers
 {
