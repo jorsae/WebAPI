@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
             return Ok(surveyQuestion);
         }
 
+        // GET: api/surveyquestion/surveyid/5
         [Route("api/surveyquestion/surveyid/{surveyId}")]
         [HttpGet]
         [ResponseType(typeof(SurveyQuestion))]
@@ -61,6 +62,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="surveyQuestion">The survey question.</param>
         /// <returns></returns>
+        [Route("api/surveyquestion/{surveyquestion}")]
         [HttpPut]
         [ResponseType(typeof(SurveyQuestion))]
         public async Task<IHttpActionResult> PutSurveyQuestion(SurveyQuestion surveyQuestion)
