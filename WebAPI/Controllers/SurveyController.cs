@@ -62,7 +62,7 @@ namespace WebAPI.Controllers
         /// </summary>
         /// <param name="survey">The survey.</param>
         /// <returns></returns>
-        [Route("api/survey/{survey}")]
+        [Route("api/survey/")]
         [HttpPut]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> PutSurvey(Survey survey)
@@ -91,7 +91,7 @@ namespace WebAPI.Controllers
         }
 
         // POST: api/survey
-        [Route("api/survey/{survey}")]
+        [Route("api/survey/")]
         [HttpPost]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> PostSurveyChange(Survey survey)
@@ -125,7 +125,7 @@ namespace WebAPI.Controllers
             return Ok(oldSurvey);
         }
 
-        // PUT: api/survey/inactive/{surveyId}
+        // POST: api/survey/inactive/5
         [Route("api/survey/inactive/{surveyId}")]
         [HttpPost]
         [ResponseType(typeof(void))]
