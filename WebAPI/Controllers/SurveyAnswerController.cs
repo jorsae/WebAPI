@@ -19,8 +19,8 @@ namespace WebAPI.Controllers
         private DatabaseContext db = new DatabaseContext();
 
         // GET: api/SurveyAnswer
-        [HttpGet]
         [Route("api/surveyanswer/")]
+        [HttpGet]
         public IQueryable<SurveyAnswer> GetSurveyAnswers()
         {
             return db.SurveyAnswers;
@@ -44,6 +44,7 @@ namespace WebAPI.Controllers
             return Ok(surveyAnswer);
         }
 
+        // GET: api/surveyanswer/question/5
         /// <summary>
         /// Gets the survey question answers.
         /// </summary>
@@ -64,6 +65,7 @@ namespace WebAPI.Controllers
             return Ok(surveyAnswers);
         }
 
+        // PUT: api/surveyanswer
         [Route("api/surveyanswer/")]
         [HttpPut]
         [ResponseType(typeof(IEnumerable<SurveyAnswer>))]

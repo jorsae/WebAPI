@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
+        // GET: api/survey/bd10ea7b-a91f-426f-a6b0-aab3a890067d
         [Route("api/survey/{surveyGuid}")]
         [HttpGet]
         [ResponseType(typeof(Survey))]
@@ -55,12 +56,13 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
-        // PUT: api/survey/{survey}
+        // PUT: api/survey
         /// <summary>
         /// Puts survey to database
         /// </summary>
         /// <param name="survey">The survey.</param>
         /// <returns></returns>
+        [Route("api/survey/{survey}")]
         [HttpPut]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> PutSurvey(Survey survey)
@@ -88,6 +90,8 @@ namespace WebAPI.Controllers
             return Ok(survey);
         }
 
+        // POST: api/survey
+        [Route("api/survey/{survey}")]
         [HttpPost]
         [ResponseType(typeof(Survey))]
         public async Task<IHttpActionResult> PostSurveyChange(Survey survey)
